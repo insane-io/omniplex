@@ -3,14 +3,14 @@ import { getStorage } from "firebase/storage";
 import { getFirestore } from "firebase/firestore";
 
 // Firebase Config
-export const firebaseConfig = {
-  apiKey: "",
-  authDomain: "",
-  projectId: "",
-  storageBucket: "",
-  messagingSenderId: "",
-  appId: "",
-  measurementId: "",
+const firebaseConfig = {
+  apiKey: "AIzaSyCh4l6v0ZOXmSP7kIFghPbMTtdXTh0-dY8",
+  authDomain: "test1-ae136.firebaseapp.com",
+  projectId: "test1-ae136",
+  storageBucket: "test1-ae136.firebasestorage.app",
+  messagingSenderId: "854662364603",
+  appId: "1:854662364603:web:a0de0876bbf33c0ef8589e",
+  measurementId: "G-HQD5HEGQH5"
 };
 
 const app = initializeApp(firebaseConfig);

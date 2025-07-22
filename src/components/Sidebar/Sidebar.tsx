@@ -73,6 +73,10 @@ const Sidebar = () => {
     }
   }, [authState]);
 
+  const handlePriceButton = () => {
+      router.push("/pricing");
+  }
+
   const closeSidebar = () => {
     setIsClosing(true);
     setTimeout(() => {
@@ -109,20 +113,28 @@ const Sidebar = () => {
         <div onClick={toggleSidebar} className={styles.menu}>
           <Image priority={true} src={Menu} alt="Menu" width={24} height={24} />
         </div>
-        <div
-          className={styles.titleButton}
-          style={{ opacity: isSidebarOpen ? 0 : 1 }}
-          onClick={handleNewChat}
-        >
-          <Image
-            priority={true}
-            src={Pen}
-            alt={"Pen"}
-            width={20}
-            height={20}
-            className={styles.titleButtonIcon}
-          />
-          <p className={styles.titleButtonText}>New Chat</p>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <div
+            className={styles.titleButton}
+            style={{ opacity: isSidebarOpen ? 0 : 1 }}
+            onClick={handleNewChat}
+          >
+            <Image
+              priority={true}
+              src={Pen}
+              alt={"Pen"}
+              width={20}
+              height={20}
+              className={styles.titleButtonIcon}
+            />
+            <p className={styles.titleButtonText}>New Chat</p>
+          </div>
+          <div
+            style={{ opacity: isSidebarOpen ? 0 : 1, display: "flex", alignItems: "center", cursor: "pointer" }}
+            onClick={handlePriceButton}
+          >
+            <p className={styles.titleButtonText}>Pricing</p>
+          </div>
         </div>
       </div>
       {isSidebarOpen && (

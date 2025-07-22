@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const BING_API_KEY = process.env.BING_API_KEY;
-const BING_SEARCH_URL = "https://api.bing.microsoft.com/v7.0/search";
+const SERP_API_KEY = process.env.SERP_API_KEY;
+const SERP_API_URL = "https://serpapi.com/search";
 
 export const runtime = "edge";
 
@@ -18,25 +18,17 @@ export async function GET(req: NextRequest) {
     );
   }
 
-  if (!BING_API_KEY) {
-    console.error(
-      "Bing API key is undefined. Please check your .env.local file."
-    );
+  if (!SERP_API_KEY) {
+    console.error("SerpAPI key is undefined. Please check your .env.local file.");
     return new NextResponse(
-      JSON.stringify({ message: "Bing API key is not configured." }),
+      JSON.stringify({ message: "SerpAPI key is not configured." }),
       { status: 500 }
     );
   }
 
   try {
     const response = await fetch(
-      `${BING_SEARCH_URL}?q=${encodeURIComponent(q)}`,
-      {
-        method: "GET",
-        headers: new Headers({
-          "Ocp-Apim-Subscription-Key": BING_API_KEY,
-        }),
-      }
+      `${SERP_API_URL}?q=${encodeURIComponent(q)}&engine=bing&api_key=${SERP_API_KEY}`
     );
 
     if (!response.ok) {
@@ -46,7 +38,7 @@ export async function GET(req: NextRequest) {
     const data = await response.json();
     return NextResponse.json({ message: "Success", data });
   } catch (error) {
-    console.error("Bing API request error:", error);
+    console.error("SerpAPI request error:", error);
     return new NextResponse(
       JSON.stringify({ message: "Internal Server Error" }),
       { status: 500 }
