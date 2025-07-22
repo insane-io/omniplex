@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { loadStripe } from "@stripe/stripe-js"
 
-const page = () => {
+const Pricing = () => {
   const [loading, setLoading] = useState(false)
   const [purchased, setPurchased] = useState(false)
   const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || "")
@@ -24,13 +24,15 @@ const page = () => {
       method: "POST",
     })
     const data = await res.json()
-    localStorage.setItem("stripeSessionId", data.id)
-    setPurchased(true)
     const result = await stripe?.redirectToCheckout({
       sessionId: data.id,
     })
     if (result?.error) {
-      console.error(result.error.message)
+      setLoading(false)
+    }
+    if(!result?.error){
+      localStorage.setItem("stripeSessionId", data.id)
+      setPurchased(true)
       setLoading(false)
     }
   }
@@ -128,4 +130,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Pricing
