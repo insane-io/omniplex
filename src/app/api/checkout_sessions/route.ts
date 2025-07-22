@@ -8,6 +8,7 @@ export async function POST(request: Request) {
       headers: { "Content-Type": "application/json" },
     });
   }
+  //nothing
   const stripe = new Stripe(stripeSecretKey, {
     apiVersion: "2025-06-30.basil",
   });
