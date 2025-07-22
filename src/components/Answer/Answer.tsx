@@ -4,8 +4,8 @@ import Image from "next/image";
 import Markdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import rehypeKatex from "rehype-katex";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { vscDarkPlus as dark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import SyntaxHighlighter from "react-syntax-highlighter/dist/esm/prism";
+import { dark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { Skeleton } from "@nextui-org/skeleton";
 import { Citation } from "@/utils/types";
 
@@ -68,6 +68,7 @@ const Answer = (props: Props) => {
                 const { children, className, node, ...rest } = props;
                 const match = /language-(\w+)/.exec(className || "");
                 return match ? (
+                  // @ts-ignore
                   <SyntaxHighlighter
                     PreTag="div"
                     language={match[1]}
